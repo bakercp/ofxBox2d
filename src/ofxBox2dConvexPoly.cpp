@@ -62,9 +62,8 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
     line.getVertices().erase(line.getVertices().end()-1);
     
     
-    b2Vec2 * vertices;
-    int32  vertexCount = line.getVertices().size();
-    vertices = new b2Vec2[vertexCount];
+    auto vertexCount = line.getVertices().size();
+    b2Vec2* vertices = new b2Vec2[vertexCount];
     ofPoint pos;
     ghettoRadius = 0;
     for (int i = 0; i < vertexCount; i++){
@@ -118,7 +117,7 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
 	
 	shape.Set(vertices, vertexCount);
     
-    delete vertices;
+    delete[] vertices;
     
 	fixture.shape		= &shape;
 	fixture.density		= density;
