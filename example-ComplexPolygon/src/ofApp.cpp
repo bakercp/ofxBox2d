@@ -34,7 +34,7 @@ void ofApp::setup() {
 vector <ofDefaultVertexType> ofApp::loadPoints(const std::string& file) {
 	vector <ofDefaultVertexType> pts;
 	vector <string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
-	for(int i=0; i<ptsStr.size(); i+=2) {
+	for(auto i=0; i<ptsStr.size(); i+=2) {
 		float x = ofToFloat(ptsStr[i]);
 		float y = ofToFloat(ptsStr[i+1]);
 		pts.push_back(ofDefaultVertexType(x, y, 0));
@@ -65,7 +65,7 @@ void ofApp::update() {
 void ofApp::draw() {
 
 	// some circles :)
-	for(int i=0; i<circles.size(); i++) {
+	for(auto i=0; i<circles.size(); i++) {
 		ofFill();
 		ofSetHexColor(0xc0dd3b);
 		circles[i]->draw();
@@ -77,7 +77,7 @@ void ofApp::draw() {
 
 	ofSetHexColor(0x444342);
 	ofNoFill();
-	for(int i=0; i<polyShapes.size(); i++) {
+	for(auto i=0; i<polyShapes.size(); i++) {
 		polyShapes[i]->draw();
 
 		ofDrawCircle(polyShapes[i]->getPosition(), 3);
@@ -154,7 +154,7 @@ void ofApp::mouseReleased(int x, int y, int button) {
 		addRandomPointsInside(shape, 255);
 
 		// now loop through all the trainles and make a box2d triangle
-		for(int i=0; i<tris.size(); i++) {
+		for(auto i=0; i<tris.size(); i++) {
 
 			auto triangle = std::make_shared<ofxBox2dPolygon>();
 			triangle->addTriangle(ofDefaultVertexType(tris[i].a.x,

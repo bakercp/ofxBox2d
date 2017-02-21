@@ -36,17 +36,17 @@ void ofApp::update() {
 	ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
 	float minDis = ofGetMousePressed() ? 300 : 200;
 
-	for(int i=0; i<circles.size(); i++) {
-		float dis = mouse.distance(circles[i].get()->getPosition());
-		if(dis < minDis) circles[i].get()->addRepulsionForce(mouse, 9);
-		else circles[i].get()->addAttractionPoint(mouse, 4.0);
+	for(auto i=0; i<circles.size(); i++) {
+		float dis = mouse.distance(circles[i]->getPosition());
+		if(dis < minDis) circles[i]->addRepulsionForce(mouse, 9);
+		else circles[i]->addAttractionPoint(mouse, 4.0);
 		
 		
 	}
-	for(int i=0; i<boxes.size(); i++) {
-		float dis = mouse.distance(boxes[i].get()->getPosition());
-		if(dis < minDis) boxes[i].get()->addRepulsionForce(mouse, 9);
-		else boxes[i].get()->addAttractionPoint(mouse, 4.0);
+	for(auto i=0; i<boxes.size(); i++) {
+		float dis = mouse.distance(boxes[i]->getPosition());
+		if(dis < minDis) boxes[i]->addRepulsionForce(mouse, 9);
+		else boxes[i]->addAttractionPoint(mouse, 4.0);
 	}
 }
 
@@ -54,16 +54,16 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	
-	for(int i=0; i<circles.size(); i++) {
+	for(auto i=0; i<circles.size(); i++) {
 		ofFill();
 		ofSetHexColor(0xf6c738);
-		circles[i].get()->draw();
+		circles[i]->draw();
 	}
 	
-	for(int i=0; i<boxes.size(); i++) {
+	for(auto i=0; i<boxes.size(); i++) {
 		ofFill();
 		ofSetHexColor(0xBF2545);
-		boxes[i].get()->draw();
+		boxes[i]->draw();
 	}
 	
 	// draw the ground

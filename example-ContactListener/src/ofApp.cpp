@@ -91,13 +91,13 @@ void ofApp::draw() {
 	
 	for(size_t i=0; i<circles.size(); i++) {
 		ofFill();
-		SoundData * data = (SoundData*)circles[i].get()->getData();
+		SoundData * data = (SoundData*)circles[i]->getData();
 		
 		if(data && data->bHit) ofSetHexColor(0xff0000);
 		else ofSetHexColor(0x4ccae9);
 		
 		
-		circles[i].get()->draw();
+		circles[i]->draw();
 	}
 	
 	string info = "";

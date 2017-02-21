@@ -4,7 +4,7 @@
 #include "TextureShape.h"
 
 // ------------------------------------------------- App
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -25,5 +25,5 @@ public:
 	vector <ofImage> textures;
 
 	// a vector of all the texture shapes
-	vector <shared_ptr<TextureShape> > shapes;
+	std::vector<std::shared_ptr<TextureShape>> shapes;
 };

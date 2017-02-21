@@ -11,7 +11,7 @@ public:
 };
 
 // -------------------------------------------------
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -34,7 +34,7 @@ public:
 	// when the ball hits we play this sound
 	ofSoundPlayer  sound[N_SOUNDS];
 	
-	ofxBox2d                                box2d;   // the box2d world
-	vector    <shared_ptr<ofxBox2dCircle> > circles; // default box2d circles
+	ofxBox2d box2d;   // the box2d world
+	std::vector<std::shared_ptr<ofxBox2dCircle>> circles; // default box2d circles
 	
 };

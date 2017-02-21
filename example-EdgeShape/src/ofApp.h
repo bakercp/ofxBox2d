@@ -3,7 +3,7 @@
 #include "ofxBox2d.h"
 
 // -------------------------------------------------
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -24,10 +24,10 @@ public:
 	float                                   groundTimer;
 
 	
-	ofxBox2d                                box2d;
+	ofxBox2d box2d;
 	ofPolyline                              groundLine;
 	ofxBox2dEdge                            ground;
 
-	vector    <shared_ptr<ofxBox2dCircle> > circles; // default box2d circles
-	vector    <shared_ptr<ofxBox2dRect> >   boxes;   // defalut box2d rects
+	std::vector<std::shared_ptr<ofxBox2dCircle>> circles; // default box2d circles
+	std::vector<std::shared_ptr<ofxBox2dRect>> boxes;   // defalut box2d rects
 };

@@ -30,7 +30,7 @@ circles.push_back(circle);
 
 ```
 // in your header files
-vector <shared_ptr<ofxBox2dCircle> > circles;
+std::vector<std::shared_ptr<ofxBox2dCircle>> circles;
 
 // now add a circle to the vector
 auto circle = std::make_shared<ofxBox2dCircle>();

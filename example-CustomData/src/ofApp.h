@@ -64,7 +64,7 @@ public:
 };
 
 // ------------------------------------------------- App
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -79,7 +79,7 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
 	
-	ofxBox2d                             box2d;
-	vector <shared_ptr<CustomParticle> > particles;
+	ofxBox2d box2d;
+	std::vector<std::shared_ptr<CustomParticle>> particles;
 	
 };

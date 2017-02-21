@@ -23,8 +23,8 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	
-	for(int i=0; i<particles.size(); i++) {
-		particles[i].get()->draw();
+	for(auto i=0; i<particles.size(); i++) {
+		particles[i]->draw();
 	}
 	
 	string info = "FPS: "+ofToString(ofGetFrameRate(), 1);

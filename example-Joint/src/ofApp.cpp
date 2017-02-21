@@ -24,16 +24,16 @@ void ofApp::setup() {
 	}
 	
 	// now connect each circle with a joint
-	for(int i=0; i<circles.size(); i++) {
+	for(auto i=0; i<circles.size(); i++) {
 		
 		auto joint = std::make_shared<ofxBox2dJoint>();
 		
 		// if this is the first point connect to the top anchor.
 		if(i == 0) {
-			joint.get()->setup(box2d.getWorld(), anchor.body, circles[i].get()->body);
+			joint.get()->setup(box2d.getWorld(), anchor.body, circles[i]->body);
 		}
 		else {
-			joint.get()->setup(box2d.getWorld(), circles[i-1].get()->body, circles[i].get()->body);
+			joint.get()->setup(box2d.getWorld(), circles[i-1]->body, circles[i]->body);
 		}
 		
 		joint.get()->setLength(25);
@@ -53,15 +53,15 @@ void ofApp::draw() {
 	ofSetHexColor(0xf2ab01);
 	anchor.draw();
 	
-	for(int i=0; i<circles.size(); i++) {
+	for(auto i=0; i<circles.size(); i++) {
 		ofFill();
 		ofSetHexColor(0x01b1f2);
-		circles[i].get()->draw();
+		circles[i]->draw();
 	}
 	
-	for(int i=0; i<joints.size(); i++) {
+	for(auto i=0; i<joints.size(); i++) {
 		ofSetHexColor(0x444342);
-		joints[i].get()->draw();
+		joints[i]->draw();
 	}
 	
 	string info = "";
@@ -80,7 +80,7 @@ void ofApp::keyPressed(int key) {
 		// add a new circle
 		auto circle = std::make_shared<ofxBox2dCircle>();
 		circle.get()->setPhysics(3.0, 0.53, 0.1);
-		circle.get()->setup(box2d.getWorld(), circles.back().get()->getPosition().x+ofRandom(-30, 30), circles.back().get()->getPosition().y-30, 8);
+		circle.get()->setup(box2d.getWorld(), circles.back()->getPosition().x+ofRandom(-30, 30), circles.back()->getPosition().y-30, 8);
 		circles.push_back(circle);
 	
 		// get this cirlce and the prev cirlce
@@ -89,7 +89,7 @@ void ofApp::keyPressed(int key) {
 
 		// now connect the new circle with a joint
 		auto joint = std::make_shared<ofxBox2dJoint>();
-		joint.get()->setup(box2d.getWorld(), circles[a].get()->body, circles[b].get()->body);
+		joint.get()->setup(box2d.getWorld(), circles[a]->body, circles[b]->body);
 		joint.get()->setLength(25);
 		joints.push_back(joint);
 	}

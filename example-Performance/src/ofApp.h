@@ -3,7 +3,7 @@
 #include "ofxBox2d.h"
 
 // -------------------------------------------------
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 
 public:
 
@@ -19,9 +19,9 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void resized(int w, int h);
 
-	ofxBox2d                               box2d;      // world
+	ofxBox2d box2d;      // world
 	ofxBox2dCircle                         ground;     // ground
 	ofVboMesh                              groundMesh; // ground mesh
-	vector  <shared_ptr<ofxBox2dCircle> >  circles;    // default box2d circles
-	vector  <shared_ptr<ofxBox2dRect> >    boxes;	   // defalut box2d rects
+	std::vector<std::shared_ptr<ofxBox2dCircle>> circles;    // default box2d circles
+	std::vector<std::shared_ptr<ofxBox2dRect>> boxes;	   // defalut box2d rects
 };
