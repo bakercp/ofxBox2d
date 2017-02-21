@@ -30,7 +30,7 @@ void ofApp::update() {
 	
 	// add some circles every so often
 	if((int)ofRandom(0, 10) == 0) {
-		shapes.push_back(shared_ptr<TextureShape>(new TextureShape));
+		shapes.push_back(std::make_shared<TextureShape>();
 		shapes.back().get()->setTexture(&textures[(int)ofRandom(textures.size())]);
 		shapes.back().get()->setup(box2d, (ofGetWidth()/2)+ofRandom(-20, 20), -20, ofRandom(10, 50));
 	}

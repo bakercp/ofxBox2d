@@ -44,14 +44,14 @@ void ofApp::update() {
 	box2d.update();
 	 
 	float r = ofRandom(4, 20);
-	circles.push_back(shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle));
+	circles.push_back(std::make_shared<ofxBox2dCircle>());
 	circles.back().get()->setPhysics(3.0, 0.53, 0.1);
 	circles.back().get()->setup(box2d.getWorld(), ofGetWidth()/2+ofRandom(-100, 100), -200+ofRandom(30, 100), r);
 
 
 	float w = ofRandom(4, 20);
 	float h = ofRandom(4, 20);
-	boxes.push_back(shared_ptr<ofxBox2dRect>(new ofxBox2dRect));
+	boxes.push_back(std::make_shared<ofxBox2dRect>();
 	boxes.back().get()->setPhysics(3.0, 0.53, 0.1);
 	boxes.back().get()->setup(box2d.getWorld(), ofGetWidth()/2+ofRandom(-100, 100), -200+ofRandom(30, 100), w, h);
 }
@@ -90,14 +90,14 @@ void ofApp::keyPressed(int key) {
 	if(key == 'c') {
 		for(int i=0; i<10; i++) {
 			float r = ofRandom(2, 5);
-			circles.push_back(shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle));
+			circles.push_back(std::make_shared<ofxBox2dCircle>());
 			circles.back().get()->setPhysics(3.0, 0.53, 0.1);
 			circles.back().get()->setup(box2d.getWorld(), ofGetMouseX()+ofRandom(-10, 10), ofGetMouseY()+ofRandom(-10, 10), r);
 		}
 	} else if(key == 'b') {
 		float w = ofRandom(2, 20);
 		float h = ofRandom(2, 20);
-		boxes.push_back(shared_ptr<ofxBox2dRect>(new ofxBox2dRect));
+		boxes.push_back(std::make_shared<ofxBox2dRect>();
 		boxes.back().get()->setPhysics(3.0, 0.53, 0.1);
 		boxes.back().get()->setup(box2d.getWorld(), ofGetMouseX(), ofGetMouseY(), w, h);
 	}

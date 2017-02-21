@@ -100,7 +100,7 @@ void ofApp::keyPressed(int key) {
 	
 	if(key == 'c') {
 		float r = ofRandom(4, 20);		// a random radius 4px - 20px
-		circles.push_back(shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle));
+		circles.push_back(std::make_shared<ofxBox2dCircle>());
 		circles.back().get()->setPhysics(3.0, 0.53, 0.1);
 		circles.back().get()->setup(box2d.getWorld(), mouseX, mouseY, r);
 		
@@ -109,14 +109,14 @@ void ofApp::keyPressed(int key) {
 	if(key == 'b') {
 		float w = ofRandom(4, 20);	
 		float h = ofRandom(4, 20);	
-		boxes.push_back(shared_ptr<ofxBox2dRect>(new ofxBox2dRect));
+		boxes.push_back(std::make_shared<ofxBox2dRect>();
 		boxes.back().get()->setPhysics(3.0, 0.53, 0.1);
 		boxes.back().get()->setup(box2d.getWorld(), mouseX, mouseY, w, h);
 	}
 	
 	if(key == 'z') {
 		
-		customParticles.push_back(shared_ptr<CustomParticle>(new CustomParticle));
+		customParticles.push_back(std::make_shared<CustomParticle>();
 		CustomParticle * p = customParticles.back().get();
 		float r = ofRandom(3, 10);		// a random radius 4px - 20px
 		p->setPhysics(0.4, 0.53, 0.31);
