@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-static bool shouldRemove(shared_ptr<ofxBox2dBaseShape>shape) {
+static bool shouldRemove(std::shared_ptr<ofxBox2dBaseShape>shape) {
 	return !ofRectangle(0, -400, ofGetWidth(), ofGetHeight()+400).inside(shape->getPosition());
 }
 

@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-static bool removeShapeOffScreen(shared_ptr<ofxBox2dBaseShape> shape) {
+static bool removeShapeOffScreen(std::shared_ptr<ofxBox2dBaseShape> shape) {
 	if (!ofRectangle(0, -400, ofGetWidth(), ofGetHeight()+400).inside(shape.get()->getPosition())) {
 		return true;
 	}
