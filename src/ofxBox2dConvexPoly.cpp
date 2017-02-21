@@ -61,12 +61,11 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
     ofPolyline line = convexHull(_line);
     line.getVertices().erase(line.getVertices().end()-1);
     
-    
     auto vertexCount = line.getVertices().size();
     b2Vec2* vertices = new b2Vec2[vertexCount];
     ofPoint pos;
     ghettoRadius = 0;
-    for (int i = 0; i < vertexCount; i++){
+    for (auto i = 0; i < vertexCount; i++){
         vertices[i].x = line.getVertices()[i].x;
         vertices[i].y = line.getVertices()[i].y;
         pos.x += line.getVertices()[i].x;
@@ -75,7 +74,7 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
     }
     pos /= (float)vertexCount;
     
-    for (int i = 0; i < vertexCount; i++){
+    for (auto i = 0; i < vertexCount; i++){
         float dist = (pos - line.getVertices()[i]).length();
         if (dist > ghettoRadius){
             ghettoRadius = dist;
@@ -83,7 +82,7 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
     }
 
     
-    for (int i = 0; i < vertexCount; i++){
+    for (auto i = 0; i < vertexCount; i++){
         vertices[i].x /= OFX_BOX2D_SCALE;
         vertices[i].y /= OFX_BOX2D_SCALE;
     }
@@ -95,7 +94,7 @@ void ofxBox2dConvexPoly::setup(b2World * b2dworld, ofPolyline & _line){
     ghettoRadius    /= OFX_BOX2D_SCALE;
 
 	ofPath path;
-	for (int i = 0; i < vertexCount; i++){
+	for (auto i = 0; i < vertexCount; i++){
 		vertices[i].x -= pos.x;
 		vertices[i].y -= pos.y;
 		ofDefaultVertexType cur(vertices[i].x, vertices[i].y, 0);
