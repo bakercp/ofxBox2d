@@ -30,8 +30,12 @@ public:
     
 	//----------------------------------------
 	void addTriangle(const ofDefaultVertexType &a, const ofDefaultVertexType &b, const ofDefaultVertexType &c);
-	void addVertexes(vector <ofDefaultVertexType> &pts);
-	void addVertexes(ofPolyline &polyline);
+
+    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(vector <ofDefaultVertexType> &pts) );
+    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(ofPolyline &polyline) );
+
+    void addVertices(const std::vector<ofDefaultVertexType>& pts);
+    void addVertices(const ofPolyline &polyline);
 
 	//----------------------------------------
 	// Polygon helper functions

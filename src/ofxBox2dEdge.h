@@ -20,9 +20,13 @@ private:
 public:
 
     ofVboMesh mesh;
-    void addVertexes(ofPolyline &polyline);
-    void addVertexes(vector <ofVec2f> &pts);
-    
+
+    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(ofPolyline &polyline) );
+    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(vector <ofVec2f> &pts) );
+
+    void addVertices(const ofPolyline& polyline);
+    void addVertices(const std::vector<ofVec2f>& pts);
+
     void clear();
     void destroy();
     

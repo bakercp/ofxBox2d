@@ -51,17 +51,27 @@ void ofxBox2dPolygon::addTriangle(const ofDefaultVertexType &a,
  These were in ofPolyline and now are gone?
 */
 //----------------------------------------
-void ofxBox2dPolygon::addVertexes(vector <ofDefaultVertexType> &pts) {
+void ofxBox2dPolygon::addVertices(const std::vector<ofDefaultVertexType>& pts) {
 	for (size_t i=0; i<pts.size(); i++) {
 		addVertex(pts[i].x, pts[i].y);
 	}
 }
 
+void ofxBox2dPolygon::addVertexes(vector <ofDefaultVertexType> &pts) {
+    addVertices(pts);
+}
+
+
 //----------------------------------------
-void ofxBox2dPolygon::addVertexes(ofPolyline &polyline) {
+void ofxBox2dPolygon::addVertices(const ofPolyline& polyline) {
 	for (size_t i=0; i<polyline.size(); i++) {
 		addVertex(polyline[i].x, polyline[i].y);
 	}
+}
+
+
+void ofxBox2dPolygon::addVertexes(ofPolyline &polyline) {
+    addVertices(polyline);
 }
 
 //----------------------------------------

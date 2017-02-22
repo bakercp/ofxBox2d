@@ -64,19 +64,27 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
  These were in ofPolyline and now are gone?
  */
 //----------------------------------------
-void ofxBox2dEdge::addVertexes(vector <ofVec2f> &pts) {
-	for (int i=0; i<pts.size(); i++) {
+void ofxBox2dEdge::addVertices(const std::vector<ofVec2f>& pts) {
+	for (std::size_t i=0; i<pts.size(); i++) {
         ofPolyline::addVertex(pts[i].x, pts[i].y);
 	}
     flagHasChanged();
 }
 
+void ofxBox2dEdge::addVertexes(vector <ofVec2f> &pts) {
+    addVertices(pts);
+}
+
 //----------------------------------------
-void ofxBox2dEdge::addVertexes(ofPolyline &polyline) {
-	for (int i=0; i<polyline.size(); i++) {
+void ofxBox2dEdge::addVertices(const ofPolyline& polyline) {
+    for (std::size_t i=0; i<polyline.size(); i++) {
 		ofPolyline::addVertex(polyline[i].x, polyline[i].y);
 	}
     flagHasChanged();
+}
+
+void ofxBox2dEdge::addVertexes(ofPolyline &polyline) {
+    addVertices(polyline);
 }
 
 //----------------------------------------
