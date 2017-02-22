@@ -54,7 +54,7 @@ private:
 public:
 	
 	// b2AABB				worldAABB;
-	b2World *			world;
+    std::unique_ptr<b2World> world;
 	ofxBox2dRender		debugRender;
 	
 	float				scale;
@@ -104,7 +104,7 @@ public:
 	void		grabShapeUp(float x, float y, int id = -1 );		// -1 is reserved for mouse.
 	void		grabShapeDragged(float x, float y, int id = -1 );	// -1 is reserved for mouse.
 	
-	b2World*	getWorld()		  { return world;				   }
+	b2World*	getWorld()		  { return world.get();				   }
 	int			getBodyCount();
 	int			getJointCount();
 	

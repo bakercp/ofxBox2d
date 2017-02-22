@@ -50,10 +50,6 @@ ofxBox2d::~ofxBox2d() {
             world->DestroyJoint(j);
             j = next;
         }
-        /*
-        // This is not safe...
-        delete world;
-        world = NULL;*/
     }
 }
 
@@ -91,9 +87,8 @@ void ofxBox2d::init() {
 	
 	//worldAABB.lowerBound.Set(-100.0f, -100.0f);
 	//worldAABB.upperBound.Set(100.0f, 100.0f);
-	delete world;
-    world = NULL;
-	world = new b2World(b2Vec2(gravity.x, gravity.y));
+
+    world = std::make_unique<b2World>(b2Vec2(gravity.x, gravity.y));
     world->SetAllowSleeping(doSleep);
 	//world->SetDebugDraw(&debugRender);
 	
