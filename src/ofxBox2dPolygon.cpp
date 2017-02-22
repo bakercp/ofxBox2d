@@ -183,7 +183,7 @@ void ofxBox2dPolygon::create(b2World * b2dworld) {
         makeConvexPoly();
 		vector<ofDefaultVertexType> pts = ofPolyline::getVertices();
         vector<b2Vec2>verts;
-        for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
+        for (std::size_t i=0; i < std::min(pts.size(), std::size_t(b2_maxPolygonVertices)); i++) {
             verts.push_back(screenPtToWorldPt(pts[i]));
         }
         b2PolygonShape shape;
@@ -227,7 +227,7 @@ void ofxBox2dPolygon::addAttractionPoint (ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
                     b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
@@ -248,6 +248,7 @@ void ofxBox2dPolygon::addAttractionPoint (float x, float y, float amt) {
 void ofxBox2dPolygon::addRepulsionForce(float x, float y, float amt) {
 	addRepulsionForce(ofVec2f(x, y), amt);
 }
+
 void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
 	// we apply forces at each vertex. 
     if(body != NULL) {
@@ -259,7 +260,7 @@ void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
                     b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
@@ -282,7 +283,7 @@ vector <ofDefaultVertexType>& ofxBox2dPolygon::getPoints() {
 		
 			if(poly) {
 				ofPolyline::clear();
-				for(int i=0; i<poly->GetVertexCount(); i++) {
+				for(auto i=0; i<poly->GetVertexCount(); i++) {
 					b2Vec2 pt = b2Mul(xf, poly->GetVertex(i));
 					ofPolyline::addVertex(pt.x*OFX_BOX2D_SCALE, pt.y*OFX_BOX2D_SCALE);
 				}

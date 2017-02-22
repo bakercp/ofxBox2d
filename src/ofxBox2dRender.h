@@ -15,7 +15,7 @@ public:
 	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
 		ofSetColor(color.r*255.0, color.g*255.0, color.b*255.0);
 		ofBeginShape();
-		for (int i = 0; i < vertexCount; ++i) {
+		for (auto i = 0; i < vertexCount; ++i) {
 			ofVertex(vertices[i].x*OFX_BOX2D_SCALE, vertices[i].y*OFX_BOX2D_SCALE);
 		}
 		ofEndShape();
@@ -24,7 +24,7 @@ public:
 
 		ofSetHexColor(0xffffff);
 		ofBeginShape();
-		for(int i=0; i<vertexCount; ++i) {
+		for(auto i=0; i<vertexCount; ++i) {
 			ofVertex(vertices[i].x*OFX_BOX2D_SCALE, vertices[i].y*OFX_BOX2D_SCALE);
 		}
 		ofEndShape();
@@ -37,7 +37,7 @@ public:
 		float32 theta = 0.0f;
 		ofSetColor(color.r*255.0, color.g*255.0, color.b*255.0);
 		ofBeginShape();
-		for (int i = 0; i < k_segments; i++) {
+		for (auto i = 0; i < k_segments; i++) {
 			b2Vec2 v = center + radius * b2Vec2(cosf(theta), sinf(theta));
 			ofVertex(v.x, v.y);
 			theta += k_increment;

@@ -17,7 +17,7 @@
 ofPolyline convexHull(ofPolyline & line){
     
     vector < hPoint > ptsIn;
-    for (int i = 0; i < line.getVertices().size(); i++){
+    for (std::size_t i = 0; i < line.getVertices().size(); i++){
         hPoint pt;
         pt.x = line.getVertices()[i].x;
         pt.y = line.getVertices()[i].y;
@@ -30,7 +30,7 @@ ofPolyline convexHull(ofPolyline & line){
     
     ofPolyline out;
     
-    for (int i = 0; i < ptsOut.size(); i++){
+    for (std::size_t i = 0; i < ptsOut.size(); i++){
         out.addVertex(ofPoint(ptsOut[i].x, ptsOut[i].y));
     }
     
@@ -146,7 +146,7 @@ void ofxBox2dConvexPoly::setScale(float _scale){
     
     b2PolygonShape* shape = (b2PolygonShape*) fix->GetShape();
     
-    for (int i = 0; i < polyPts.size(); i++){
+    for (std::size_t i = 0; i < polyPts.size(); i++){
         shape->m_vertices[i].Set(polyPts[i].x*scale, polyPts[i].y*scale); 
     }
     
@@ -166,7 +166,7 @@ void ofxBox2dConvexPoly::addAttractionPoint (ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
                     b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
@@ -198,7 +198,7 @@ void ofxBox2dConvexPoly::addRepulsionForce(ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
                     b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;

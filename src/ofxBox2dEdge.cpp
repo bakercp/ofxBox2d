@@ -44,7 +44,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     
     vector<ofDefaultVertexType>&pts = ofPolyline::getVertices();
 
-    for(int i=1; i<(int)size(); i++) {
+    for(std::size_t i=1; i< size(); i++) {
         b2EdgeShape edge;
         edge.Set(screenPtToWorldPt(pts[i-1]), screenPtToWorldPt(pts[i]));
         body->CreateFixture(&edge, density);
@@ -52,7 +52,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     mesh.clear();
     mesh.setUsage(body->GetType()==b2_staticBody?GL_STATIC_DRAW:GL_DYNAMIC_DRAW);
     mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-    for(int i=0; i<(int)size(); i++) {
+    for(std::size_t i=0; i< size(); i++) {
         mesh.addVertex(ofVec3f(pts[i].x, pts[i].y));
     }
     
