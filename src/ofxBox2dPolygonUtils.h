@@ -193,7 +193,7 @@ static float getTriangleRadius(const ofVec2f& v1, const ofVec2f& v2, const ofVec
 }
 
 //-------------------------------------------------------------------
-static ofVec2f getTriangleCenter(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
+static ofVec2f getTriangleCenter(const ofVec2f& v1, const ofVec2f& v2, const ofVec2f& v3) {
 
     float a = v2.distance(v3);
     float b = v1.distance(v3);
@@ -208,7 +208,7 @@ static ofVec2f getTriangleCenter(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
 
 
 //-------------------------------------------------------------------
-static float getArea(const vector <ofVec2f> pts) {
+static float getArea(const std::vector<ofVec2f>& pts) {
 	int i, j, n = pts.size();
 	float polyArea = 0;
 	for (i = 0; i < n; i++) {
@@ -221,7 +221,7 @@ static float getArea(const vector <ofVec2f> pts) {
 }
 
 //-------------------------------------------------------------------
-static float getTriangleArea(ofVec2f &a, ofVec2f &b, ofVec2f &c) {
+static float getTriangleArea(const ofVec2f& a, const ofVec2f& b, const ofVec2f& c) {
 	vector <ofVec2f> pts;
 	pts.push_back(a);
 	pts.push_back(b);
@@ -238,7 +238,7 @@ static float getTriangleArea(ofVec2f &a, ofVec2f &b, ofVec2f &c) {
 }
 
 //-------------------------------------------------------------------
-static ofRectangle getPolygonBounds(const vector <ofVec2f> & vertices) {
+static ofRectangle getPolygonBounds(const std::vector<ofVec2f>& vertices) {
 	ofRectangle bounds;
 	bounds.x        = 100000;
 	bounds.y	    = 100000;
@@ -261,7 +261,7 @@ static ofRectangle getPolygonBounds(const vector <ofVec2f> & vertices) {
 }
 
 //-------------------------------------------------------------------
-static void addRandomPointsInside(ofPolyline &poly, int amt=100) {
+static void addRandomPointsInside(ofPolyline& poly, int amt = 100) {
 
 	ofRectangle bounds = poly.getBoundingBox();
 
@@ -273,7 +273,7 @@ static void addRandomPointsInside(ofPolyline &poly, int amt=100) {
 }
 
 //-------------------------------------------------------------------
-static void addRandomPointsInside(vector <ofVec2f> & vertices, int amt=100) {
+static void addRandomPointsInside(std::vector<ofVec2f>& vertices, int amt=100) {
 
 	ofRectangle bounds = getPolygonBounds(vertices);
 
@@ -286,18 +286,18 @@ static void addRandomPointsInside(vector <ofVec2f> & vertices, int amt=100) {
 
 
 //-------------------------------------------------------------------
-static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
-															const ofPolyline &polyOutline) {
+static std::vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
+                                                                 const ofPolyline &polyOutline) {
 
-	vector <TriangleShape> triangles;
+    std::vector<TriangleShape> triangles;
 
 	if(pts.size() < 3 || polyOutline.size() < 3) return triangles;
 
 	// now triangluate from the polyline
-	vector <Delaunay::Point>	delaunayPts;
-	Delaunay::Point				tempP;
+    std::vector <Delaunay::Point> delaunayPts;
+	Delaunay::Point tempP;
 
-	for(size_t i=0; i<pts.size(); i++) {
+    for(std::size_t i=0; i<pts.size(); i++) {
 		tempP[0] = pts[i].x;
 		tempP[1] = pts[i].y;
 		delaunayPts.push_back(tempP);
@@ -307,7 +307,7 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pt
 	delobject.Triangulate();
 
 	// get all the triangles
-	for(Delaunay::fIterator fit=delobject.fbegin(); fit!=delobject.fend(); ++fit) {
+	for (Delaunay::fIterator fit=delobject.fbegin(); fit!=delobject.fend(); ++fit) {
 
 		float triArea = delobject.area(fit);
 
@@ -316,7 +316,7 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pt
 		int ptc   = delobject.Apex(fit);
 
 		if(pta == -1 || ptb == -1 || ptc == -1) {
-			printf("don't have a triangle man!\n");
+            ofLogWarning("triangulatePolygonWithOutline") << "Not a triangle."; 
 			continue;
 		}
 
@@ -398,7 +398,7 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 		int ptc   = delobject.Apex(fit);
 
 		if(pta == -1 || ptb == -1 || ptc == -1) {
-			printf("don't have a triangle man!\n");
+            ofLogWarning("triangulatePolygonWithOutline") << "Not a triangle.";
 			continue;
 		}
 
