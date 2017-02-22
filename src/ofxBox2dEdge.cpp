@@ -28,7 +28,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     bFlagShapeUpdate = false;
     
     if(size() < 2) {
-		printf("need at least 3 points\n");
+        ofLogWarning("ofxBox2dEdge::create") << "need at least 3 points.";
 		return;
 	}
 	
@@ -117,7 +117,7 @@ void ofxBox2dEdge::draw() {
     if(body==NULL) return;
    
 	if(!bFlagShapeUpdate && body->GetType() != b2_staticBody) {
-        printf("Need to update shape first\n");
+        ofLogWarning("ofxBox2dEdge::draw") << "Need to update shape first.";
     }
     // Temporary fix until we switch to OF 0.8.0.
     mesh.draw();
