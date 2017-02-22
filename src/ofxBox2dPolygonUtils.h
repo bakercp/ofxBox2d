@@ -176,38 +176,11 @@ static bool insidePolygon(const ofVec2f & p, const vector<ofVec2f> & polygon){
 
 //-------------------------------------------------------------------
 static bool insidePolygon(const ofVec2f & p, const ofPolyline &polygon){
-	if(polygon.size() < 1) return false;
-	int counter = 0;
-	int i;
-	double xinters;
-	ofVec2f p1,p2;
-	float x = p.x;
-	float y = p.y;
-	int N = polygon.size();
-
-	p1 = polygon[0];
-	for (i=1;i<=N;i++) {
-		p2 = polygon[i % N];
-		if (y > MIN(p1.y,p2.y)) {
-			if (y <= MAX(p1.y,p2.y)) {
-				if (x <= MAX(p1.x,p2.x)) {
-					if (p1.y != p2.y) {
-						xinters = (y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
-						if (p1.x == p2.x || x <= xinters)
-							counter++;
-					}
-				}
-			}
-		}
-		p1 = p2;
-	}
-
-	if (counter % 2 == 0) return false;
-	else return true;
+    return ofPolyline::inside(p.x, p.y, polygon);
 }
 
 //-------------------------------------------------------------------
-static float getTriangleRadius(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
+static float getTriangleRadius(const ofVec2f& v1, const ofVec2f& v2, const ofVec2f& v3) {
 
     float a = v1.distance(v2);
     float b = v2.distance(v3);
