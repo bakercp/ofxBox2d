@@ -19,37 +19,80 @@
 
 class ofxBox2dContactArgs : public ofEventArgs {
 public:
-	
-	b2Fixture * a;
-	b2Fixture * b;
+    ofxBox2dContactArgs(b2Contact* _contact):
+        contact(_contact),
+        a(_contact->GetFixtureA()),
+        b(_contact->GetFixtureB())
+    {
+    }
+
+    b2Contact* contact = nullptr;
+	b2Fixture* a = nullptr;
+	b2Fixture* b = nullptr;
+
 };
+
+class ofxBox2dPreSolveArgs : public ofxBox2dContactArgs {
+public:
+    ofxBox2dPreSolveArgs(b2Contact* contact, const b2Manifold* _oldManifold):
+        ofxBox2dContactArgs(contact),
+        oldManifold(_oldManifold)
+    {
+    }
+
+    const b2Manifold* oldManifold = nullptr;
+
+};
+
+
+class ofxBox2dPostSolveArgs : public ofxBox2dContactArgs {
+public:
+    ofxBox2dPostSolveArgs(b2Contact* contact, const b2ContactImpulse* _impulse):
+        ofxBox2dContactArgs(contact),
+        impulse(_impulse)
+    {
+    }
+
+    const b2ContactImpulse* impulse = nullptr;
+
+};
+
+
 
 class ofxBox2d : public b2ContactListener {
 	
 private:
 	
-    bool                enableContactEvents;
-	float				fps;
-	int					velocityIterations;
-	int					positionIterations;
+    bool enableContactEvents;
+	float fps;
+	int velocityIterations;
+	int positionIterations;
 	
 	// Called when two fixtures begin to touch.
-	void BeginContact(b2Contact* contact) { 
-		static ofxBox2dContactArgs args;
-		args.a = contact->GetFixtureA();
-		args.b = contact->GetFixtureB();
-		ofNotifyEvent( contactStartEvents, args, this);
+	void BeginContact(b2Contact* contact) override {
+        ofxBox2dContactArgs args(contact);
+		ofNotifyEvent(contactStartEvents, args, this);
+	}
+
+    void PreSolve(b2Contact* contact, const b2Manifold* oldManifold) override
+    {
+        ofxBox2dPreSolveArgs args(contact, oldManifold);
+        ofNotifyEvent(contactPreSolveEvents, args, this);
+    }
+
+    void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) override
+    {
+        ofxBox2dPostSolveArgs args(contact, impulse);
+        ofNotifyEvent(contactPostSolveEvents, args, this);
+    }
+
+    // Called when two fixtures cease to touch.
+	void EndContact(b2Contact* contact) override {
+		ofxBox2dContactArgs args(contact);
+		ofNotifyEvent(contactEndEvents, args, this);
 	}
 	
-	// Called when two fixtures cease to touch.
-	void EndContact(b2Contact* contact) { 
-		static ofxBox2dContactArgs args;
-		args.a = contact->GetFixtureA();
-		args.b = contact->GetFixtureB();
-		ofNotifyEvent( contactEndEvents, args, this);
-	}
-	
-    ofPoint				gravity;
+    ofPoint gravity;
 
 public:
 	
@@ -79,8 +122,10 @@ public:
 	// ------------------------------------------------------
     void enableEvents();
     void disableEvents();
-	ofEvent <ofxBox2dContactArgs> contactStartEvents;
-	ofEvent <ofxBox2dContactArgs> contactEndEvents;
+	ofEvent<ofxBox2dContactArgs> contactStartEvents;
+    ofEvent<ofxBox2dPreSolveArgs> contactPreSolveEvents;
+    ofEvent<ofxBox2dPostSolveArgs> contactPostSolveEvents;
+	ofEvent<ofxBox2dContactArgs> contactEndEvents;
 	
 	// ------------------------------------------------------ 
 	ofxBox2d();
