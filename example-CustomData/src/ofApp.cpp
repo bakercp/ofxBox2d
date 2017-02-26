@@ -33,38 +33,12 @@ void ofApp::draw() {
 	ofDrawBitmapString(info, 20, 20);
 }
 
-
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key) {
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y) {
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button) {
-
-}
-
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
 	auto p = std::make_shared<CustomParticle>();
-	p.get()->setPhysics(1.0, 0.5, 0.3);
-	p.get()->setup(box2d.getWorld(), x, y, ofRandom(20, 60));
-	p.get()->setVelocity(ofRandom(-30, 30), ofRandom(-30, 30));
-	p.get()->setupTheCustomData();
+	p->setPhysics(1.0, 0.5, 0.3);
+	p->setup(box2d.getWorld(), x, y, ofRandom(20, 60));
+	p->setVelocity(ofRandom(-30, 30), ofRandom(-30, 30));
+	p->setupTheCustomData();
 	particles.push_back(p);
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button) {
-	
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h) {
-
 }
