@@ -29,6 +29,3 @@ public:
 	virtual void contactRemove(ofPoint p) {
 	}
 };
-
-
-

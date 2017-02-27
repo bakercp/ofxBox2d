@@ -308,15 +308,3 @@ void ofxBox2dPolygon::draw() {
     mesh.draw();
     ofPopMatrix();
 }
-
-
-
-
-
-
-
-
-
-
-
-

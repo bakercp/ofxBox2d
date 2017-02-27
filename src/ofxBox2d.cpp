@@ -483,4 +483,3 @@ void ofxBox2d::drawGround() {
 void ofxBox2d::draw() {
 	drawGround();
 }
-

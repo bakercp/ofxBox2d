@@ -106,9 +106,3 @@ public:
 	virtual void draw();
 	
 };
-
-
-
-
-
-

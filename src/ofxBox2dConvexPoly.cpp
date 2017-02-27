@@ -223,4 +223,3 @@ void ofxBox2dConvexPoly::draw() {
 	gpuCachedTesselation.draw();
 	ofPopMatrix();
 }
-

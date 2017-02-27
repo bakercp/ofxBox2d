@@ -40,17 +40,3 @@ public:
     float scale;
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-

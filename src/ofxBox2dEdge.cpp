@@ -124,12 +124,3 @@ void ofxBox2dEdge::draw() {
     //ofPolyline::draw();
     bFlagShapeUpdate = false;
 }
-
-
-
-
-
-
-
-
-

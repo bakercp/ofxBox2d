@@ -48,15 +48,3 @@ public:
 	b2Vec2  getReactionForceB2D(float inv_dt) const;
 	float   getReactionTorque(float inv_dt) const;
 };
-
-
-
-
-
-
-
-
-
-
-
-
