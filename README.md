@@ -62,3 +62,4 @@ Compatibility
 ------------
 
 The `master` branch is compatible with [the current release of openFrameworks](http://openframeworks.cc/download), and the `develop` branch tries to stay up to date with openFrameworks on GitHub.
+
