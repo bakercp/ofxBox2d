@@ -5,7 +5,7 @@ ofxBox2d
 
 Introduction
 ------------
-This is a simple wrapper for Box2d using Openframeworks. The examples below are still in progress, but should be stable for the most part. Please open up a issue if you have suggestions or find bugs. The wrapper is using Box2d version 2.3.
+This is a simple wrapper for Box2d using Openframeworks. The examples below are still in progress, but should be stable for the most part. Please open up a issue if you have suggestions or find bugs. The wrapper is using Box2d github version [ff2fa5cb92c0fb...](https://github.com/erincatto/Box2D/commit/ff2fa5cb92c0fb7cf357ddfded6152be1629386c).
 
 Thanks,
 Todd
@@ -15,17 +15,17 @@ Installation
 
 First, pick the branch that matches your version of openFrameworks:
 
-* OF [stable](https://github.com/openframeworks/openFrameworks/tree/stable) (0.9.8): use [ofxBox2d/stable](https://github.com/vanderlin/ofxBox2d/tree/stable)
-* OF [master](https://github.com/openframeworks/openFrameworks) (0.10.0): use [ofxBox2d/master](https://github.com/vanderlin/ofxBox2d/)
+*   OF [stable](https://github.com/openframeworks/openFrameworks/tree/stable) (0.9.8): use [ofxBox2d/stable](https://github.com/vanderlin/ofxBox2d/tree/stable)
+*   OF [master](https://github.com/openframeworks/openFrameworks) (0.10.0): use [ofxBox2d/master](https://github.com/vanderlin/ofxBox2d/)
 
 Instructions
 ------------
 
 When making a vector of objects you need to be careful. You either need to make a vector of pointers or use the `shared_ptr` object.     
-    
-Everytime you push into the vector `circles` the object is destroyed and the created.
+
+Every time you push into the vector `circles` the object is destroyed and the created.
 This causing issues for the `b2dBody body` object owned by Box2d.       
-  
+
 ***Incorrect way to store objects.***   
 
 ```
@@ -44,8 +44,8 @@ std::vector<std::shared_ptr<ofxBox2dCircle>> circles;
 auto circle = std::make_shared<ofxBox2dCircle>();
 
 // to grab the pointer you use the get() function of shared_ptr (std::shared_ptr)
-circle.get()->setPhysics(3.0, 0.53, 0.1);
-circle.get()->setup(box2d.getWorld(), 100, 100, 10);
+circle->setPhysics(3.0, 0.53, 0.1);
+circle->setup(box2d.getWorld(), 100, 100, 10);
 circles.push_back(circle);
 ```
 
@@ -54,7 +54,9 @@ Installation
 
 Place ofxBox2d within a folder in the apps folder of the OF dir tree:
 
+```
     openframeworks/addons/ofxBox2d
+```
 
 Compatibility
 ------------
