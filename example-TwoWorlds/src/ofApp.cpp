@@ -76,7 +76,7 @@ void ofApp::drawGravity(ofPoint p, ofPoint gravity) {
 	
 	ofPushMatrix();
 	ofTranslate(p.x, p.y);
-	ofRotate(angle);
+	ofRotateDeg(angle);
 	ofDrawLine(0, 0, 0, len);
 	ofDrawTriangle(0, len,
 	              -5, len-10,
