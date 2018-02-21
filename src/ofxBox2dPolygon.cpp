@@ -51,17 +51,27 @@ void ofxBox2dPolygon::addTriangle(const ofDefaultVertexType &a,
  These were in ofPolyline and now are gone?
 */
 //----------------------------------------
-void ofxBox2dPolygon::addVertexes(vector <ofDefaultVertexType> &pts) {
+void ofxBox2dPolygon::addVertices(const std::vector<ofDefaultVertexType>& pts) {
 	for (size_t i=0; i<pts.size(); i++) {
 		addVertex(pts[i].x, pts[i].y);
 	}
 }
 
+void ofxBox2dPolygon::addVertexes(vector <ofDefaultVertexType> &pts) {
+    addVertices(pts);
+}
+
+
 //----------------------------------------
-void ofxBox2dPolygon::addVertexes(ofPolyline &polyline) {
+void ofxBox2dPolygon::addVertices(const ofPolyline& polyline) {
 	for (size_t i=0; i<polyline.size(); i++) {
 		addVertex(polyline[i].x, polyline[i].y);
 	}
+}
+
+
+void ofxBox2dPolygon::addVertexes(ofPolyline &polyline) {
+    addVertices(polyline);
 }
 
 //----------------------------------------
@@ -173,7 +183,7 @@ void ofxBox2dPolygon::create(b2World * b2dworld) {
         makeConvexPoly();
 		vector<ofDefaultVertexType> pts = ofPolyline::getVertices();
         vector<b2Vec2>verts;
-        for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
+        for (std::size_t i=0; i < std::min(pts.size(), std::size_t(b2_maxPolygonVertices)); i++) {
             verts.push_back(screenPtToWorldPt(pts[i]));
         }
         b2PolygonShape shape;
@@ -217,8 +227,13 @@ void ofxBox2dPolygon::addAttractionPoint (ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
+<<<<<<< HEAD
                 for(int i=0; i<poly->m_count; i++) {
                     b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
+=======
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
+                    b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
+>>>>>>> f4a3c134627022714e6a6dab4bc2cdbf5ce1bf5b
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
                     body->ApplyForce(F, P, true);
@@ -238,6 +253,7 @@ void ofxBox2dPolygon::addAttractionPoint (float x, float y, float amt) {
 void ofxBox2dPolygon::addRepulsionForce(float x, float y, float amt) {
 	addRepulsionForce(ofVec2f(x, y), amt);
 }
+
 void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
 	// we apply forces at each vertex. 
     if(body != NULL) {
@@ -249,8 +265,13 @@ void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
+<<<<<<< HEAD
                 for(int i=0; i<poly->m_count; i++) {
                     b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
+=======
+                for(auto i=0; i<poly->GetVertexCount(); i++) {
+                    b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
+>>>>>>> f4a3c134627022714e6a6dab4bc2cdbf5ce1bf5b
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
                     body->ApplyForce(-F, P, true);
@@ -272,8 +293,13 @@ vector <ofDefaultVertexType>& ofxBox2dPolygon::getPoints() {
 		
 			if(poly) {
 				ofPolyline::clear();
+<<<<<<< HEAD
 				for(int i=0; i<poly->m_count; i++) {
 					b2Vec2 pt = b2Mul(xf, poly->m_vertices[i]);
+=======
+				for(auto i=0; i<poly->GetVertexCount(); i++) {
+					b2Vec2 pt = b2Mul(xf, poly->GetVertex(i));
+>>>>>>> f4a3c134627022714e6a6dab4bc2cdbf5ce1bf5b
 					ofPolyline::addVertex(pt.x*OFX_BOX2D_SCALE, pt.y*OFX_BOX2D_SCALE);
 				}
 				if(isClosed()) ofPolyline::close();
@@ -297,15 +323,3 @@ void ofxBox2dPolygon::draw() {
     mesh.draw();
     ofPopMatrix();
 }
-
-
-
-
-
-
-
-
-
-
-
-

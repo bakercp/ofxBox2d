@@ -110,13 +110,13 @@ static vector <ofVec2f> simplifyContour(vector <ofVec2f> &V, float tol) {
 
     int    i, k, m, pv;            // misc counters
     float  tol2 = tol * tol;       // tolerance squared
-    
+
     vector<ofVec2f> vt(n);
 
 	int* mk = new int[n]; //dynamically allocate a new int array
-	
+
 	memset(mk, 0, n * sizeof(int));
-	
+
     // STAGE 1.  Vertex Reduction within tolerance of prior vertex cluster
     vt[0] = V[0];              // start at the beginning
     for (i=k=1, pv=0; i<n; i++) {
@@ -128,9 +128,9 @@ static vector <ofVec2f> simplifyContour(vector <ofVec2f> &V, float tol) {
 
     // STAGE 2.  Douglas-Peucker polyline simplification
     mk[0] = mk[k-1] = 1;       // mark the first and last vertices
-    
+
     simplifyDP( tol, &vt[0], 0, k-1, mk );
-	
+
     // copy marked vertices to the output simplified polyline
     for (i=m=0; i<k; i++) {
         if (mk[i]) sV[m++] = vt[i];
@@ -156,9 +156,9 @@ static bool insidePolygon(const ofVec2f & p, const vector<ofVec2f> & polygon){
 	p1 = polygon[0];
 	for (i=1;i<=N;i++) {
 		p2 = polygon[i % N];
-		if (y > MIN(p1.y,p2.y)) {
-			if (y <= MAX(p1.y,p2.y)) {
-				if (x <= MAX(p1.x,p2.x)) {
+		if (y > std::min(p1.y,p2.y)) {
+			if (y <= std::max(p1.y,p2.y)) {
+				if (x <= std::max(p1.x,p2.x)) {
 					if (p1.y != p2.y) {
 						xinters = (y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
 						if (p1.x == p2.x || x <= xinters)
@@ -176,38 +176,11 @@ static bool insidePolygon(const ofVec2f & p, const vector<ofVec2f> & polygon){
 
 //-------------------------------------------------------------------
 static bool insidePolygon(const ofVec2f & p, const ofPolyline &polygon){
-	if(polygon.size() < 1) return false;
-	int counter = 0;
-	int i;
-	double xinters;
-	ofVec2f p1,p2;
-	float x = p.x;
-	float y = p.y;
-	int N = polygon.size();
-
-	p1 = polygon[0];
-	for (i=1;i<=N;i++) {
-		p2 = polygon[i % N];
-		if (y > MIN(p1.y,p2.y)) {
-			if (y <= MAX(p1.y,p2.y)) {
-				if (x <= MAX(p1.x,p2.x)) {
-					if (p1.y != p2.y) {
-						xinters = (y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
-						if (p1.x == p2.x || x <= xinters)
-							counter++;
-					}
-				}
-			}
-		}
-		p1 = p2;
-	}
-
-	if (counter % 2 == 0) return false;
-	else return true;
+    return ofPolyline::inside(p.x, p.y, polygon);
 }
 
 //-------------------------------------------------------------------
-static float getTriangleRadius(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
+static float getTriangleRadius(const ofVec2f& v1, const ofVec2f& v2, const ofVec2f& v3) {
 
     float a = v1.distance(v2);
     float b = v2.distance(v3);
@@ -220,7 +193,7 @@ static float getTriangleRadius(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
 }
 
 //-------------------------------------------------------------------
-static ofVec2f getTriangleCenter(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
+static ofVec2f getTriangleCenter(const ofVec2f& v1, const ofVec2f& v2, const ofVec2f& v3) {
 
     float a = v2.distance(v3);
     float b = v1.distance(v3);
@@ -235,7 +208,7 @@ static ofVec2f getTriangleCenter(ofVec2f v1, ofVec2f v2, ofVec2f v3) {
 
 
 //-------------------------------------------------------------------
-static float getArea(const vector <ofVec2f> pts) {
+static float getArea(const std::vector<ofVec2f>& pts) {
 	int i, j, n = pts.size();
 	float polyArea = 0;
 	for (i = 0; i < n; i++) {
@@ -248,7 +221,7 @@ static float getArea(const vector <ofVec2f> pts) {
 }
 
 //-------------------------------------------------------------------
-static float getTriangleArea(ofVec2f &a, ofVec2f &b, ofVec2f &c) {
+static float getTriangleArea(const ofVec2f& a, const ofVec2f& b, const ofVec2f& c) {
 	vector <ofVec2f> pts;
 	pts.push_back(a);
 	pts.push_back(b);
@@ -265,7 +238,7 @@ static float getTriangleArea(ofVec2f &a, ofVec2f &b, ofVec2f &c) {
 }
 
 //-------------------------------------------------------------------
-static ofRectangle getPolygonBounds(const vector <ofVec2f> & vertices) {
+static ofRectangle getPolygonBounds(const std::vector<ofVec2f>& vertices) {
 	ofRectangle bounds;
 	bounds.x        = 100000;
 	bounds.y	    = 100000;
@@ -274,7 +247,7 @@ static ofRectangle getPolygonBounds(const vector <ofVec2f> & vertices) {
 
 	float farRight  = -100000;
 	float bottom    = -100000;
-    
+
 	for (size_t i=0; i<vertices.size(); i++) {
         if( vertices[i].x < bounds.x ) bounds.x = vertices[i].x;
 		if( vertices[i].y < bounds.y ) bounds.y = vertices[i].y;
@@ -288,7 +261,7 @@ static ofRectangle getPolygonBounds(const vector <ofVec2f> & vertices) {
 }
 
 //-------------------------------------------------------------------
-static void addRandomPointsInside(ofPolyline &poly, int amt=100) {
+static void addRandomPointsInside(ofPolyline& poly, int amt = 100) {
 
 	ofRectangle bounds = poly.getBoundingBox();
 
@@ -300,7 +273,7 @@ static void addRandomPointsInside(ofPolyline &poly, int amt=100) {
 }
 
 //-------------------------------------------------------------------
-static void addRandomPointsInside(vector <ofVec2f> & vertices, int amt=100) {
+static void addRandomPointsInside(std::vector<ofVec2f>& vertices, int amt=100) {
 
 	ofRectangle bounds = getPolygonBounds(vertices);
 
@@ -313,18 +286,18 @@ static void addRandomPointsInside(vector <ofVec2f> & vertices, int amt=100) {
 
 
 //-------------------------------------------------------------------
-static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
-															const ofPolyline &polyOutline) {
+static std::vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
+                                                                 const ofPolyline &polyOutline) {
 
-	vector <TriangleShape> triangles;
+    std::vector<TriangleShape> triangles;
 
 	if(pts.size() < 3 || polyOutline.size() < 3) return triangles;
 
 	// now triangluate from the polyline
-	vector <Delaunay::Point>	delaunayPts;
-	Delaunay::Point				tempP;
-    
-	for(size_t i=0; i<pts.size(); i++) {
+    std::vector <Delaunay::Point> delaunayPts;
+	Delaunay::Point tempP;
+
+    for(std::size_t i=0; i<pts.size(); i++) {
 		tempP[0] = pts[i].x;
 		tempP[1] = pts[i].y;
 		delaunayPts.push_back(tempP);
@@ -334,7 +307,7 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pt
 	delobject.Triangulate();
 
 	// get all the triangles
-	for(Delaunay::fIterator fit=delobject.fbegin(); fit!=delobject.fend(); ++fit) {
+	for (Delaunay::fIterator fit=delobject.fbegin(); fit!=delobject.fend(); ++fit) {
 
 		float triArea = delobject.area(fit);
 
@@ -343,7 +316,7 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pt
 		int ptc   = delobject.Apex(fit);
 
 		if(pta == -1 || ptb == -1 || ptc == -1) {
-			printf("don't have a triangle man!\n");
+            ofLogWarning("triangulatePolygonWithOutline") << "Not a triangle."; 
 			continue;
 		}
 
@@ -382,7 +355,7 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pt
 static vector <TriangleShape> triangulatePolygonWithOutline(const vector <ofPoint> &pts,
 															const ofPolyline &polyOutline) {
     ofPolyline p;
-    
+
     for (size_t i=0; i<pts.size(); i++) p.addVertex(pts[i]);
     return triangulatePolygonWithOutline(p, polyOutline);
 }
@@ -405,7 +378,7 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 	// now triangluate from the polyline (3)
 	vector <Delaunay::Point>	delaunayPts;
 	Delaunay::Point				tempP;
-    
+
 	for(size_t i=0; i<pts.size(); i++) {
 		tempP[0] = pts[i].x;
 		tempP[1] = pts[i].y;
@@ -425,7 +398,7 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 		int ptc   = delobject.Apex(fit);
 
 		if(pta == -1 || ptb == -1 || ptc == -1) {
-			printf("don't have a triangle man!\n");
+            ofLogWarning("triangulatePolygonWithOutline") << "Not a triangle.";
 			continue;
 		}
 
@@ -463,7 +436,7 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 //-------------------------------------------------------------------
 static vector <TriangleShape> triangulatePolygon(const ofPolyline &poly, bool addPointsInside=false, int amt=100) {
 	vector <ofVec2f> pts;
-    
+
 	for (size_t i=0; i<poly.size(); i++) {
 		pts.push_back(poly[i]);
 	}
@@ -520,7 +493,7 @@ static vector<hPoint> calcConvexHull(vector<hPoint> P) {
 static ofPolyline getConvexHull(vector<ofDefaultVertexType>& linePts){
 
     vector < hPoint > ptsIn;
-    
+
     for (size_t i = 0; i < linePts.size(); i++){
         hPoint pt;
         pt.x = linePts[i].x;
@@ -533,7 +506,7 @@ static ofPolyline getConvexHull(vector<ofDefaultVertexType>& linePts){
     ptsOut =  calcConvexHull(ptsIn);
 
     ofPolyline outLine;
-    
+
     for (size_t i = 0; i < ptsOut.size(); i++){
         outLine.addVertex(ofPoint(ptsOut[i].x, ptsOut[i].y));
     }

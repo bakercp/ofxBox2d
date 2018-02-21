@@ -156,17 +156,3 @@ void ofxBox2dCircle::draw() {
 	ofPopMatrix();
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

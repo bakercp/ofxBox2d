@@ -26,8 +26,8 @@ public:
 	bool isBody();
 	
 	//----------------------------------------
-    static bool shouldRemove(shared_ptr<ofxBox2dBaseShape> shape);
-    static bool shouldRemoveOffScreen(shared_ptr<ofxBox2dBaseShape> shape);
+    static bool shouldRemove(std::shared_ptr<ofxBox2dBaseShape> shape);
+    static bool shouldRemoveOffScreen(std::shared_ptr<ofxBox2dBaseShape> shape);
 	bool isFixed();
 	bool isSleeping();
     
@@ -106,9 +106,3 @@ public:
 	virtual void draw();
 	
 };
-
-
-
-
-
-

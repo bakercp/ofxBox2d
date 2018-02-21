@@ -28,7 +28,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     bFlagShapeUpdate = false;
     
     if(size() < 2) {
-		printf("need at least 3 points\n");
+        ofLogWarning("ofxBox2dEdge::create") << "need at least 3 points.";
 		return;
 	}
 	
@@ -44,7 +44,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     
     vector<ofDefaultVertexType>&pts = ofPolyline::getVertices();
 
-    for(int i=1; i<(int)size(); i++) {
+    for(std::size_t i=1; i< size(); i++) {
         b2EdgeShape edge;
         edge.Set(screenPtToWorldPt(pts[i-1]), screenPtToWorldPt(pts[i]));
         body->CreateFixture(&edge, density);
@@ -52,7 +52,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
     mesh.clear();
     mesh.setUsage(body->GetType()==b2_staticBody?GL_STATIC_DRAW:GL_DYNAMIC_DRAW);
     mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-    for(int i=0; i<(int)size(); i++) {
+    for(std::size_t i=0; i< size(); i++) {
         mesh.addVertex(ofVec3f(pts[i].x, pts[i].y));
     }
     
@@ -64,19 +64,27 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
  These were in ofPolyline and now are gone?
  */
 //----------------------------------------
-void ofxBox2dEdge::addVertexes(vector <ofVec2f> &pts) {
-	for (int i=0; i<pts.size(); i++) {
+void ofxBox2dEdge::addVertices(const std::vector<ofVec2f>& pts) {
+	for (std::size_t i=0; i<pts.size(); i++) {
         ofPolyline::addVertex(pts[i].x, pts[i].y);
 	}
     flagHasChanged();
 }
 
+void ofxBox2dEdge::addVertexes(vector <ofVec2f> &pts) {
+    addVertices(pts);
+}
+
 //----------------------------------------
-void ofxBox2dEdge::addVertexes(ofPolyline &polyline) {
-	for (int i=0; i<polyline.size(); i++) {
+void ofxBox2dEdge::addVertices(const ofPolyline& polyline) {
+    for (std::size_t i=0; i<polyline.size(); i++) {
 		ofPolyline::addVertex(polyline[i].x, polyline[i].y);
 	}
     flagHasChanged();
+}
+
+void ofxBox2dEdge::addVertexes(ofPolyline &polyline) {
+    addVertices(polyline);
 }
 
 //----------------------------------------
@@ -109,19 +117,10 @@ void ofxBox2dEdge::draw() {
     if(body==NULL) return;
    
 	if(!bFlagShapeUpdate && body->GetType() != b2_staticBody) {
-        printf("Need to update shape first\n");
+        ofLogWarning("ofxBox2dEdge::draw") << "Need to update shape first.";
     }
     // Temporary fix until we switch to OF 0.8.0.
     mesh.draw();
     //ofPolyline::draw();
     bFlagShapeUpdate = false;
 }
-
-
-
-
-
-
-
-
-

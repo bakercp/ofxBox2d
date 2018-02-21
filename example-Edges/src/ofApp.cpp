@@ -58,7 +58,7 @@ void ofApp::draw() {
 	for (int i=0; i<circles.size(); i++) {
 		ofFill();
 		ofSetHexColor(0xc0dd3b);
-		circles[i].get()->draw();
+		circles[i]->draw();
 	}
 
 	ofSetHexColor(0x444342);
@@ -67,7 +67,7 @@ void ofApp::draw() {
 		lines[i].draw();
 	}
 	for (int i=0; i<edges.size(); i++) {
-		edges[i].get()->draw();
+		edges[i]->draw();
 	}
 
 	string info = "Draw a shape with the mouse\n";

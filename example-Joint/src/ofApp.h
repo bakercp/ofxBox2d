@@ -4,7 +4,7 @@
 
 // -------------------------------------------------
 
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -20,8 +20,8 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void resized(int w, int h);
 	
-	ofxBox2d                                  box2d;   // the box2d world
+	ofxBox2d box2d;   // the box2d world
 	ofxBox2dCircle                            anchor;  // fixed anchor
-	vector      <shared_ptr<ofxBox2dCircle> > circles; // default box2d circles
-	vector      <shared_ptr<ofxBox2dJoint> >  joints;  // joints
+	std::vector<std::shared_ptr<ofxBox2dCircle>> circles; // default box2d circles
+	std::vector<std::shared_ptr<ofxBox2dJoint>> joints;  // joints
 };

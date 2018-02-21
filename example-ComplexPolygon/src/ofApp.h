@@ -4,7 +4,7 @@
 #include "ofxBox2d.h"
 
 // ------------------------------------------------- App
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 
 public:
 
@@ -25,7 +25,7 @@ public:
 
 	bool                                  breakupIntoTriangles;
 	ofPolyline                            shape;
-	ofxBox2d                              box2d;
+	ofxBox2d box2d;
 	vector <shared_ptr<ofxBox2dCircle>>   circles;
 	vector <shared_ptr<ofxBox2dPolygon>>  polyShapes;
 };

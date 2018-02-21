@@ -36,17 +36,3 @@ public:
 	void addRepulsionForce(ofVec2f pt, float amt);
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-

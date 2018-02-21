@@ -182,7 +182,3 @@ float ofxBox2dJoint::getReactionTorque(float inv_dt) const {
 	}
 	return 0;
 }
-
-
-
-

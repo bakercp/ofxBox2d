@@ -3,7 +3,7 @@
 #include "ofxBox2d.h"
 
 // ------------------------------------------------- App
-class ofApp : public ofBaseApp {
+class ofApp: public ofBaseApp {
 	
 public:
 	
@@ -18,7 +18,7 @@ public:
 	void mouseReleased(int x, int y, int button);
 	
 	vector <ofPolyline>                  lines;
-	ofxBox2d                             box2d;
-	vector <shared_ptr<ofxBox2dCircle> > circles;
-	vector <shared_ptr<ofxBox2dEdge> >   edges;
+	ofxBox2d box2d;
+	std::vector<std::shared_ptr<ofxBox2dCircle>> circles;
+	std::vector<std::shared_ptr<ofxBox2dEdge>> edges;
 };
