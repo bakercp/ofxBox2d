@@ -18,8 +18,8 @@ void ofApp::setup() {
 	// first we add just a few circles
 	for(int i=0; i<3; i++) {
 		auto circle = std::make_shared<ofxBox2dCircle>();
-		circle.get()->setPhysics(3.0, 0.53, 0.1);
-		circle.get()->setup(box2d.getWorld(), ofGetWidth()/2, 100+(i*20), 8);
+		circle->setPhysics(3.0, 0.53, 0.1);
+		circle->setup(box2d.getWorld(), ofGetWidth()/2, 100+(i*20), 8);
 		circles.push_back(circle);
 	}
 	
@@ -30,13 +30,13 @@ void ofApp::setup() {
 		
 		// if this is the first point connect to the top anchor.
 		if(i == 0) {
-			joint.get()->setup(box2d.getWorld(), anchor.body, circles[i]->body);
+			joint->setup(box2d.getWorld(), anchor.body, circles[i]->body);
 		}
 		else {
-			joint.get()->setup(box2d.getWorld(), circles[i-1]->body, circles[i]->body);
+			joint->setup(box2d.getWorld(), circles[i-1]->body, circles[i]->body);
 		}
 		
-		joint.get()->setLength(25);
+		joint->setLength(25);
 		joints.push_back(joint);
 	}
 }
@@ -79,8 +79,8 @@ void ofApp::keyPressed(int key) {
 		
 		// add a new circle
 		auto circle = std::make_shared<ofxBox2dCircle>();
-		circle.get()->setPhysics(3.0, 0.53, 0.1);
-		circle.get()->setup(box2d.getWorld(), circles.back()->getPosition().x+ofRandom(-30, 30), circles.back()->getPosition().y-30, 8);
+		circle->setPhysics(3.0, 0.53, 0.1);
+		circle->setup(box2d.getWorld(), circles.back()->getPosition().x+ofRandom(-30, 30), circles.back()->getPosition().y-30, 8);
 		circles.push_back(circle);
 	
 		// get this cirlce and the prev cirlce
@@ -89,8 +89,8 @@ void ofApp::keyPressed(int key) {
 
 		// now connect the new circle with a joint
 		auto joint = std::make_shared<ofxBox2dJoint>();
-		joint.get()->setup(box2d.getWorld(), circles[a]->body, circles[b]->body);
-		joint.get()->setLength(25);
+		joint->setup(box2d.getWorld(), circles[a]->body, circles[b]->body);
+		joint->setLength(25);
 		joints.push_back(joint);
 	}
 	

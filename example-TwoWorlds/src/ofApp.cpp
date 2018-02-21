@@ -26,16 +26,16 @@ void ofApp::setup(){
 	// add some cirlces to world A
 	for(int i=0; i<10; i++) {
 		auto c = std::make_shared<ofxBox2dCircle>();
-		c.get()->setPhysics(1, 0.5, 1);
-		c.get()->setup(box2dA.getWorld(), 250+ofRandom(-50, 50), 10, ofRandom(10,30));
+		c->setPhysics(1, 0.5, 1);
+		c->setup(box2dA.getWorld(), 250+ofRandom(-50, 50), 10, ofRandom(10,30));
 		circlesA.push_back(c);
 	}
 
 	// add some cirlces to world B
 	for(int i=0; i<10; i++) {
 		auto c = std::make_shared<ofxBox2dCircle>();
-		c.get()->setPhysics(1, 0.5, 1);
-		c.get()->setup(box2dB.getWorld(), 750+ofRandom(-50, 50), 10, ofRandom(10,30));
+		c->setPhysics(1, 0.5, 1);
+		c->setup(box2dB.getWorld(), 750+ofRandom(-50, 50), 10, ofRandom(10,30));
 		circlesB.push_back(c);
 	}
 
@@ -44,16 +44,16 @@ void ofApp::setup(){
 	for(int i=0; i<20; i++) {
 
 		auto r = std::make_shared<ofxBox2dRect>();
-		r.get()->setPhysics(1, 0.7, 0.9);
+		r->setPhysics(1, 0.7, 0.9);
 
 		// add to world A
 		if(i <= 9) {
-			r.get()->setup(box2dA.getWorld(), 250+ofRandom(-50, 50), 10, ofRandom(10,30), ofRandom(10,30));
+			r->setup(box2dA.getWorld(), 250+ofRandom(-50, 50), 10, ofRandom(10,30), ofRandom(10,30));
 		}
 
 		// add to world B
 		else {
-			r.get()->setup(box2dB.getWorld(), 750+ofRandom(-50, 50), 10, ofRandom(10,30), ofRandom(10,30));
+			r->setup(box2dB.getWorld(), 750+ofRandom(-50, 50), 10, ofRandom(10,30), ofRandom(10,30));
 		}
 
 		// add to one vector
