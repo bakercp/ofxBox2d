@@ -114,13 +114,8 @@ void ofxBox2dRect::addRepulsionForce(ofVec2f pt, float amt) {
 
 			if(poly) {
 				b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
-<<<<<<< HEAD
 				for (int i=0; i<poly->m_count; i++) {
 					b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
-=======
-				for (auto i=0; i<poly->GetVertexCount(); i++) {
-					b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
->>>>>>> f4a3c134627022714e6a6dab4bc2cdbf5ce1bf5b
 					b2Vec2 D = P - qt;
 					b2Vec2 F = amt * D;
 					body->ApplyForce(-F, P, true);
@@ -149,13 +144,8 @@ void ofxBox2dRect::addAttractionPoint (ofVec2f pt, float amt) {
 
 			if(poly) {
 				b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
-<<<<<<< HEAD
 				for (int i=0; i<poly->m_count; i++) {
 					b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
-=======
-				for (auto i=0; i<poly->GetVertexCount(); i++) {
-					b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
->>>>>>> f4a3c134627022714e6a6dab4bc2cdbf5ce1bf5b
 					b2Vec2 D = P - qt;
 					b2Vec2 F = amt * D;
 					body->ApplyForce(F, P, true);
