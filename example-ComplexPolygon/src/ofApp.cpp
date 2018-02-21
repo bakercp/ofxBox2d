@@ -31,9 +31,9 @@ void ofApp::setup() {
 }
 
 //--------------------------------------------------------------
-vector <ofDefaultVertexType> ofApp::loadPoints(const std::string& file) {
-	vector <ofDefaultVertexType> pts;
-	vector <string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
+std::vector<ofDefaultVertexType> ofApp::loadPoints(const std::string& file) {
+	std::vector<ofDefaultVertexType> pts;
+	std::vector<string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
 	for(auto i=0; i<ptsStr.size(); i+=2) {
 		float x = ofToFloat(ptsStr[i]);
 		float y = ofToFloat(ptsStr[i+1]);
@@ -148,7 +148,7 @@ void ofApp::mouseReleased(int x, int y, int button) {
 		ofPolyline resampled = shape.getResampledBySpacing(25);
 
 		// trangleate the shape, return am array of traingles
-		vector <TriangleShape> tris = triangulatePolygonWithOutline(resampled, outline);
+		std::vector<TriangleShape> tris = triangulatePolygonWithOutline(resampled, outline);
 
 		// add some random points inside
 		addRandomPointsInside(shape, 255);

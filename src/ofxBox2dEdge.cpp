@@ -71,7 +71,7 @@ void ofxBox2dEdge::addVertices(const std::vector<ofVec2f>& pts) {
     flagHasChanged();
 }
 
-void ofxBox2dEdge::addVertexes(vector <ofVec2f> &pts) {
+void ofxBox2dEdge::addVertexes(std::vector<ofVec2f> &pts) {
     addVertices(pts);
 }
 

@@ -98,10 +98,10 @@ static void simplifyDP(float tol, ofVec2f* v, int j, int k, int* mk ){
 
 //-------------------------------------------------------------------
 // needs simplifyDP which is above
-static vector <ofVec2f> simplifyContour(vector <ofVec2f> &V, float tol) {
+staticstd::vector<ofVec2f> simplifyContour(std::vector<ofVec2f> &V, float tol) {
 
 	int n = V.size();
-	vector <ofVec2f> sV;
+	std::vector<ofVec2f> sV;
 	if(n <= 2)
 	{
 	  return sV;
@@ -222,7 +222,7 @@ static float getArea(const std::vector<ofVec2f>& pts) {
 
 //-------------------------------------------------------------------
 static float getTriangleArea(const ofVec2f& a, const ofVec2f& b, const ofVec2f& c) {
-	vector <ofVec2f> pts;
+	std::vector<ofVec2f> pts;
 	pts.push_back(a);
 	pts.push_back(b);
 	pts.push_back(c);
@@ -286,7 +286,7 @@ static void addRandomPointsInside(std::vector<ofVec2f>& vertices, int amt=100) {
 
 
 //-------------------------------------------------------------------
-static std::vector <TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
+static std::std::vector<TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
                                                                  const ofPolyline &polyOutline) {
 
     std::vector<TriangleShape> triangles;
@@ -294,7 +294,7 @@ static std::vector <TriangleShape> triangulatePolygonWithOutline(const ofPolylin
 	if(pts.size() < 3 || polyOutline.size() < 3) return triangles;
 
 	// now triangluate from the polyline
-    std::vector <Delaunay::Point> delaunayPts;
+    std::std::vector<Delaunay::Point> delaunayPts;
 	Delaunay::Point tempP;
 
     for(std::size_t i=0; i<pts.size(); i++) {
@@ -352,7 +352,7 @@ static std::vector <TriangleShape> triangulatePolygonWithOutline(const ofPolylin
 
 	return triangles;
 }
-static vector <TriangleShape> triangulatePolygonWithOutline(const vector <ofPoint> &pts,
+staticstd::vector<TriangleShape> triangulatePolygonWithOutline(conststd::vector<ofPoint> &pts,
 															const ofPolyline &polyOutline) {
     ofPolyline p;
 
@@ -361,10 +361,10 @@ static vector <TriangleShape> triangulatePolygonWithOutline(const vector <ofPoin
 }
 
 //-------------------------------------------------------------------
-static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, bool addPointsInside=false, int amt=100) {
+staticstd::vector<TriangleShape> triangulatePolygon(conststd::vector<ofVec2f> &ptsIn, bool addPointsInside=false, int amt=100) {
 
-	vector <ofVec2f> pts;
-	vector <TriangleShape> triangles;
+	std::vector<ofVec2f> pts;
+	std::vector<TriangleShape> triangles;
 
 	if(ptsIn.size() < 3) return triangles;
 
@@ -376,7 +376,7 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 	}
 
 	// now triangluate from the polyline (3)
-	vector <Delaunay::Point>	delaunayPts;
+	std::vector<Delaunay::Point>	delaunayPts;
 	Delaunay::Point				tempP;
 
 	for(size_t i=0; i<pts.size(); i++) {
@@ -434,8 +434,8 @@ static vector <TriangleShape> triangulatePolygon(const vector <ofVec2f> &ptsIn, 
 }
 
 //-------------------------------------------------------------------
-static vector <TriangleShape> triangulatePolygon(const ofPolyline &poly, bool addPointsInside=false, int amt=100) {
-	vector <ofVec2f> pts;
+staticstd::vector<TriangleShape> triangulatePolygon(const ofPolyline &poly, bool addPointsInside=false, int amt=100) {
+	std::vector<ofVec2f> pts;
 
 	for (size_t i=0; i<poly.size(); i++) {
 		pts.push_back(poly[i]);
@@ -492,7 +492,7 @@ static vector<hPoint> calcConvexHull(vector<hPoint> P) {
 
 static ofPolyline getConvexHull(vector<ofDefaultVertexType>& linePts){
 
-    vector < hPoint > ptsIn;
+   std::vector< hPoint > ptsIn;
 
     for (size_t i = 0; i < linePts.size(); i++){
         hPoint pt;
@@ -501,7 +501,7 @@ static ofPolyline getConvexHull(vector<ofDefaultVertexType>& linePts){
 
         ptsIn.push_back(pt);
     }
-    vector < hPoint > ptsOut;
+   std::vector< hPoint > ptsOut;
 
     ptsOut =  calcConvexHull(ptsIn);
 

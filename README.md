@@ -29,7 +29,7 @@ This causing issues for the `b2dBody body` object owned by Box2d.
 ***Incorrect way to store objects.***   
 
 ```
-vector <ofxBox2dCircle> circles;
+std::vector<ofxBox2dCircle> circles;
 ofxBox2dCircle circle;
 circles.push_back(circle);
 ```

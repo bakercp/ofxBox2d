@@ -20,7 +20,7 @@ void ofApp::setup() {
 	ofBuffer buffer = ofBufferFromFile("lines.txt");
 
 	for (auto line: buffer.getLines()) {
-		vector <string> pts = ofSplitString(line, ",");
+		std::vector<string> pts = ofSplitString(line, ",");
 		if(pts.size() > 0) {
 			auto edge = std::make_shared<ofxBox2dEdge>();
 			for (auto j=0; j<pts.size(); j+=2) {

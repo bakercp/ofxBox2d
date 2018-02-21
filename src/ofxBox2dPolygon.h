@@ -20,7 +20,7 @@ public:
 	
 	ofVboMesh				mesh;
 	ofRectangle				bounds;
-	vector <TriangleShape>	triangles;
+	std::vector<TriangleShape>	triangles;
 	
 	//----------------------------------------
 	ofxBox2dPolygon();
@@ -31,7 +31,7 @@ public:
 	//----------------------------------------
 	void addTriangle(const ofDefaultVertexType &a, const ofDefaultVertexType &b, const ofDefaultVertexType &c);
 
-    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(vector <ofDefaultVertexType> &pts) );
+    OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(std::vector<ofDefaultVertexType> &pts) );
     OF_DEPRECATED_MSG("Use addVertices instead.", void addVertexes(ofPolyline &polyline) );
 
     void addVertices(const std::vector<ofDefaultVertexType>& pts);
@@ -45,7 +45,7 @@ public:
 	void triangulatePoly(float resampleAmt=20, int nPointsInside=-1);
     
 	//----------------------------------------
-	vector <ofDefaultVertexType> &getPoints();
+	std::vector<ofDefaultVertexType> &getPoints();
 	bool	isGoodShape() { return calculateArea() > 15; }
     
 	//------------------------------------------------

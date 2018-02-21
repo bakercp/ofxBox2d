@@ -17,5 +17,5 @@ public:
 	ofxiOSCoreMotion coreMotion;
 
 	ofxBox2d box2d;
-	vector <shared_ptr<ofxBox2dCircle>> circles;
+	std::vector<shared_ptr<ofxBox2dCircle>> circles;
 };

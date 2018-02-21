@@ -22,7 +22,7 @@ public:
 	ofxBox2d box2d;
 
 	// a vector of all the texture images
-	vector <ofImage> textures;
+	std::vector<ofImage> textures;
 
 	// a vector of all the texture shapes
 	std::vector<std::shared_ptr<TextureShape>> shapes;

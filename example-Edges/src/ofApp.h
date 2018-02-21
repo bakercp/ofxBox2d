@@ -17,7 +17,7 @@ public:
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);
 	
-	vector <ofPolyline>                  lines;
+	std::vector<ofPolyline>                  lines;
 	ofxBox2d box2d;
 	std::vector<std::shared_ptr<ofxBox2dCircle>> circles;
 	std::vector<std::shared_ptr<ofxBox2dEdge>> edges;

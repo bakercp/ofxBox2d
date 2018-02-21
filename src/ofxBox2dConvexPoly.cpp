@@ -16,7 +16,7 @@
 
 ofPolyline convexHull(ofPolyline & line){
 
-    vector < hPoint > ptsIn;
+   std::vector< hPoint > ptsIn;
     for (std::size_t i = 0; i < line.getVertices().size(); i++){
         hPoint pt;
         pt.x = line.getVertices()[i].x;
@@ -24,7 +24,7 @@ ofPolyline convexHull(ofPolyline & line){
 
         ptsIn.push_back(pt);
     }
-    vector < hPoint > ptsOut;
+   std::vector< hPoint > ptsOut;
 
     ptsOut =  calcConvexHull(ptsIn);
 
