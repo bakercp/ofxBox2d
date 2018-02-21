@@ -6,6 +6,17 @@
 /bin/*
 !/bin/data/
 
+
+*.qbs.*
+*.qbs
+*.plist
+*.xcodeproj
+*.xcconfig
+build-*
+
+Makefile
+config.make
+
 build/
 obj/
 *.o
