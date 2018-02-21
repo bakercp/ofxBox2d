@@ -98,9 +98,9 @@ static void simplifyDP(float tol, ofVec2f* v, int j, int k, int* mk ){
 
 //-------------------------------------------------------------------
 // needs simplifyDP which is above
-staticstd::vector<ofVec2f> simplifyContour(std::vector<ofVec2f> &V, float tol) {
+static std::vector<ofVec2f> simplifyContour(std::vector<ofVec2f> &V, float tol) {
 
-	int n = V.size();
+	std::size_t n = V.size();
 	std::vector<ofVec2f> sV;
 	if(n <= 2)
 	{
@@ -286,7 +286,7 @@ static void addRandomPointsInside(std::vector<ofVec2f>& vertices, int amt=100) {
 
 
 //-------------------------------------------------------------------
-static std::std::vector<TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
+static std::vector<TriangleShape> triangulatePolygonWithOutline(const ofPolyline &pts,
                                                                  const ofPolyline &polyOutline) {
 
     std::vector<TriangleShape> triangles;
@@ -294,7 +294,7 @@ static std::std::vector<TriangleShape> triangulatePolygonWithOutline(const ofPol
 	if(pts.size() < 3 || polyOutline.size() < 3) return triangles;
 
 	// now triangluate from the polyline
-    std::std::vector<Delaunay::Point> delaunayPts;
+    std::vector<Delaunay::Point> delaunayPts;
 	Delaunay::Point tempP;
 
     for(std::size_t i=0; i<pts.size(); i++) {
@@ -352,7 +352,7 @@ static std::std::vector<TriangleShape> triangulatePolygonWithOutline(const ofPol
 
 	return triangles;
 }
-staticstd::vector<TriangleShape> triangulatePolygonWithOutline(conststd::vector<ofPoint> &pts,
+static std::vector<TriangleShape> triangulatePolygonWithOutline(const std::vector<ofPoint> &pts,
 															const ofPolyline &polyOutline) {
     ofPolyline p;
 
@@ -361,7 +361,7 @@ staticstd::vector<TriangleShape> triangulatePolygonWithOutline(conststd::vector<
 }
 
 //-------------------------------------------------------------------
-staticstd::vector<TriangleShape> triangulatePolygon(conststd::vector<ofVec2f> &ptsIn, bool addPointsInside=false, int amt=100) {
+static std::vector<TriangleShape> triangulatePolygon(const std::vector<ofVec2f> &ptsIn, bool addPointsInside=false, int amt=100) {
 
 	std::vector<ofVec2f> pts;
 	std::vector<TriangleShape> triangles;
@@ -434,7 +434,7 @@ staticstd::vector<TriangleShape> triangulatePolygon(conststd::vector<ofVec2f> &p
 }
 
 //-------------------------------------------------------------------
-staticstd::vector<TriangleShape> triangulatePolygon(const ofPolyline &poly, bool addPointsInside=false, int amt=100) {
+static std::vector<TriangleShape> triangulatePolygon(const ofPolyline &poly, bool addPointsInside=false, int amt=100) {
 	std::vector<ofVec2f> pts;
 
 	for (size_t i=0; i<poly.size(); i++) {
@@ -467,10 +467,13 @@ static CoordType cross(const hPoint &O, const hPoint &A, const hPoint &B)
 
 // Returns a list of points on the convex hull in counter-clockwise order.
 // Note: the last point in the returned list is the same as the first one.
-static vector<hPoint> calcConvexHull(vector<hPoint> P) {
-	int n = P.size(), k = 0;
-	vector<hPoint> H(2*n);
+static std::vector<hPoint> calcConvexHull(const std::vector<hPoint>& _P) {
+    auto P = _P;
 
+    int n = P.size(), k = 0;
+    std::vector<hPoint> H(2*n);
+
+    
 	// Sort points lexicographically
 	sort(P.begin(), P.end());
 
@@ -490,30 +493,31 @@ static vector<hPoint> calcConvexHull(vector<hPoint> P) {
 	return H;
 }
 
-static ofPolyline getConvexHull(vector<ofDefaultVertexType>& linePts){
+static ofPolyline getConvexHull(const std::vector<ofDefaultVertexType>& linePts){
 
-   std::vector< hPoint > ptsIn;
+   std::vector<hPoint> ptsIn;
 
-    for (size_t i = 0; i < linePts.size(); i++){
+    for (std::size_t i = 0; i < linePts.size(); i++){
         hPoint pt;
         pt.x = linePts[i].x;
         pt.y = linePts[i].y;
 
         ptsIn.push_back(pt);
     }
-   std::vector< hPoint > ptsOut;
+    
+    std::vector<hPoint> ptsOut;
 
     ptsOut =  calcConvexHull(ptsIn);
 
     ofPolyline outLine;
 
-    for (size_t i = 0; i < ptsOut.size(); i++){
+    for (std::size_t i = 0; i < ptsOut.size(); i++){
         outLine.addVertex(ofPoint(ptsOut[i].x, ptsOut[i].y));
     }
 
     return outLine;
 }
-static ofPolyline getConvexHull(ofPolyline &line){
+static ofPolyline getConvexHull(const ofPolyline &line){
     return getConvexHull(line.getVertices());
 }
 
