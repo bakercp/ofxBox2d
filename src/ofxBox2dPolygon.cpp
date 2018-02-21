@@ -217,8 +217,8 @@ void ofxBox2dPolygon::addAttractionPoint (ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
-                    b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
+                for(int i=0; i<poly->m_count; i++) {
+                    b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
                     body->ApplyForce(F, P, true);
@@ -249,8 +249,8 @@ void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
             if(poly) {
                 b2Vec2 P(pt.x/OFX_BOX2D_SCALE, pt.y/OFX_BOX2D_SCALE);
                 
-                for(int i=0; i<poly->GetVertexCount(); i++) {
-                    b2Vec2 qt = b2Mul(xf, poly->GetVertex(i));
+                for(int i=0; i<poly->m_count; i++) {
+                    b2Vec2 qt = b2Mul(xf, poly->m_vertices[i]);
                     b2Vec2 D = P - qt; 
                     b2Vec2 F = amt * D;
                     body->ApplyForce(-F, P, true);
@@ -272,8 +272,8 @@ vector <ofDefaultVertexType>& ofxBox2dPolygon::getPoints() {
 		
 			if(poly) {
 				ofPolyline::clear();
-				for(int i=0; i<poly->GetVertexCount(); i++) {
-					b2Vec2 pt = b2Mul(xf, poly->GetVertex(i));
+				for(int i=0; i<poly->m_count; i++) {
+					b2Vec2 pt = b2Mul(xf, poly->m_vertices[i]);
 					ofPolyline::addVertex(pt.x*OFX_BOX2D_SCALE, pt.y*OFX_BOX2D_SCALE);
 				}
 				if(isClosed()) ofPolyline::close();
